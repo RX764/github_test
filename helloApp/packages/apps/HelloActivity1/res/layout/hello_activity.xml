@@ -1,0 +1,42 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".HelloActivity">
+
+    <TextView
+        android:id="@+id/tv_test"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_test"
+        />
+
+    
+
+    <EditText
+        android:id="@+id/et_set"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/et_set"
+        android:ems="10"
+        android:inputType="textPersonName"
+
+
+         />
+         <Button
+        android:id="@+id/bt_getval"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/bt_getval"
+         />
+         
+
+    <Button
+        android:id="@+id/bt_setval"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/bt_setval"
+         />
+</LinearLayout>
+

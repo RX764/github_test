@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <string name="hello_activity_text_text">Hello, World!</string>
+    <string name="tv_test">tv_test</string>
+    <string name="bt_getval">bt_getval</string>
+    <string name="et_set">10</string>
+    <string name="bt_setval">bt_setval</string>
+
+</resources>
