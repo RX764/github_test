@@ -1,0 +1,6 @@
+编写支持HAL的Linux驱动程序的步骤
+1、编写驱动。
+	代码尽量简洁，将业务逻辑放到HAL中
+2、编写HAL
+	hal library就是普通的Linuxlibrary(.so)文件。但是这类库有一个接口，通过HAL_MODULE_INFO_SYM变量实现。service library就是通过这个借口定义的ID定位HAL library的
+3、编写service library。不是必需的。比较灵活。

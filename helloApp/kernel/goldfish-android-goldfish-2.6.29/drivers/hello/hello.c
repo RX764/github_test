@@ -1,96 +1,136 @@
-#include <linux/module.h>
-#include <linux/init.h>
-#include <linux/fs.h>
+
+#include<linux/fs.h>
+#include<linux/init.h>
+#include<linux/kernel.h>
+#include<linux/module.h>
+#include<asm/uaccess.h>
+#include<linux/miscdevice.h>
 #include <linux/cdev.h>
-#include <linux/kernel.h>
-#include <linux/slab.h>
-#include <asm/uaccess.h>
-#include <linux/proc_fs.h>
 #include <linux/device.h>
-#include <linux/uaccess.h>
 
-struct my_hello_dev{
-    char val;
-    struct cdev cv;
-};
+#define  DEVICE_NAME "wordcount"
+#define TRUE -1
+#define FALSE 0
+static unsigned char mem[10000]; //保存写入设备的数据
+staic int written_count = 0;//单词数目
 
-dev_t devNumber;
-struct my_hello_dev *my_dev;
+//判断空格9制表符13换行符10
+static char is_spacewhite(char c)
+{
+    if(c == '' || c == 9 || c == 13 || c ==100)
+        return TRUE;
+    else
+        return FALSE;
+}
 
-int hello_open (struct inode *node, struct file *filp){
-    struct my_hello_dev *n_cdev = container_of(node->i_cdev,struct my_hello_dev,cv);
-    filp->private_data = n_cdev;
+//单词个数
+static int get word_count(const char *buf)
+{
+    int n=1,i=0;
+    char c = '';
+    char flag = 0;//处理多个空格情况，0正常情况，1已经遇到一个空格
+    if(*buf =='\0')
+        return 0;
+    if(is_spacewhite(*bug) ==TRUE)//如果第一个字符是空格，从0开始计数
+        n--;
+    for(;(c=*(buf+i)) != '\0';i++))
+    {
+        if(flag ==1 && is_spacewhite(c) == FALSE)
+            flag =0;
+        else if(flag ==1 && is_spacewhite(c)==TRUE)
+            continue;
+        if(is_spacewhite(c)==TRUE)
+        {
+            n++;
+            flag=1;
+        }
+    }
+
+    if(is_spacewhite(*(buf+i-1)) ==TRUE)
+        n--;
+    return n;
+}
+
+//从设备文件读数据
+static ssize_t word_count_read(struct file *file,char __user *buf,size_t count,loff_t *ppos)
+{
+    unsigned char temp[4];//将单词数(int类型)分解成4个字节存在bug中
+    temp[0] = word_count >> 24;
+    temp[1] = word_count >> 16;
+    temp[2] = word_count >> 8;
+    temp[3] = word_count;
+    copy_to_user(buf, temp, 4);
+    pr_err("read:word count:%d", int(count));
+    return count;
+
+}
+
+static ssize_t word_count_write(struct file *file,const char __user *buf,size_t count,loff_t *opps)
+{
+    ssize_t written = count;
+    copy_from_user(mem,buf,count);
+    mem[count]='\0';
+    word_count = get_word_count(mem);
+    pr_err("write:word count：%d",(int)word_count);
+}
+
+
+
+
+
+
+
+static struct file_operations dev_fops =
+        {
+            .owner = THIS_MODULE,//应用于当前驱动
+            .write = word_count_write,
+            .read  = word_count_read,
+        };
+//minor次设备号
+static struct miscdevice misc=
+        {
+            .minor = MISC_DYNAMIC_MINOR, //动态生成次设备号，但是要指定#define MISC_DYNAMIC_MINOR	255
+            .name = DEVICE_NAME,
+            .fops = &dev_fops,
+        };
+
+
+static int word_count_init()
+{
+    int ret;
+    ret=misc_register(&misc)
+    pr_err("ruxing:word_count_module success");
     return 0;
 }
 
-int hello_release (struct inode *node, struct file *filp){
-    filp->private_data = NULL;
-    return 0;
+static void word_count_exit()
+{
+    misc_deregister(&misc)
+    pr_err("ruxing:word_count_exit success");
 }
 
-ssize_t hello_read (struct file *filp, char __user *buf, size_t len, loff_t *pos){
-    struct my_hello_dev *n_cdev = (struct my_hello_dev *)filp->private_data;
-    int err;
-	pr_err("jiang:hello read");
-    if(copy_to_user(buf,&n_cdev->val, sizeof(n_cdev->val))){
-        err = -EFAULT;
-        return err;
-    }
-    return sizeof(n_cdev->val);
-
-}
-
-ssize_t hello_write (struct file *filp, const char __user *buf, size_t len, loff_t *pos){
-    struct my_hello_dev *n_cdev = (struct my_hello_dev *)filp->private_data;
-    int err;
-	pr_err("jiang:hello write");
-    if(copy_from_user(&n_cdev->val,buf,len)){
-        err = -EFAULT;
-        return err;
-    }
-    return sizeof(n_cdev->val);
-}
-
-struct file_operations hello_op = {
-    .owner = THIS_MODULE,
-    .open  = hello_open,
-    .release = hello_release,
-    .write = hello_write,
-    .read = hello_read
-};
-
-
-
-
-static int hello_init(void){
-	 struct class * cls =NULL;	
-
-    int err = alloc_chrdev_region(&devNumber,0,1,"hello");
-    if(err){
-		pr_err("jiang:获取设备号失败");
-        return err;
-    }
-    my_dev = kmalloc(sizeof(struct my_hello_dev),GFP_KERNEL);
-    cdev_init(&my_dev->cv,&hello_op);
-    err = cdev_add(&my_dev->cv,devNumber,1);
-    if(err){
-        pr_err("jiang:添加设备失败");
-        return err;
-    }
-
-    my_dev->val = '8';
-    cls = class_create(THIS_MODULE,"hello");
-    device_create(cls,NULL,devNumber,NULL,"hello");
-
-    return 0;
-}
-
-static void hello_exit(void){
-    unregister_chrdev_region(devNumber,1);
-    kfree(my_dev);
-    cdev_del(&my_dev->cv);
-}
-
-module_init(hello_init);
-module_exit(hello_exit);
+module_init(word_count_init);
+module_exit(word_count_exit);
 MODULE_LICENSE("GPL");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
