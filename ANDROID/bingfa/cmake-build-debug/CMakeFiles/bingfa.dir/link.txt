@@ -1,0 +1,1 @@
+/usr/bin/cc -g   CMakeFiles/bingfa.dir/main.c.o CMakeFiles/bingfa.dir/yuanzicaozuo.c.o CMakeFiles/bingfa.dir/zixuansuo.c.o CMakeFiles/bingfa.dir/semaphore.c.o  -o bingfa 

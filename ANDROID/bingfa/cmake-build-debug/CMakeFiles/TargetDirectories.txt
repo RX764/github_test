@@ -1,0 +1,3 @@
+/home/jrx/clion_code/bingfa/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/jrx/clion_code/bingfa/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/jrx/clion_code/bingfa/cmake-build-debug/CMakeFiles/bingfa.dir

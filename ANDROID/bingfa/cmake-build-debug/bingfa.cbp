@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="bingfa"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/jrx/clion_code/bingfa/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/jrx/clion_code/bingfa/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/jrx/clion_code/bingfa/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/jrx/clion_code/bingfa/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/jrx/clion_code/bingfa/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/jrx/clion_code/bingfa/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/jrx/clion_code/bingfa/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/jrx/clion_code/bingfa/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/jrx/clion_code/bingfa/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/jrx/clion_code/bingfa/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/jrx/clion_code/bingfa/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/jrx/clion_code/bingfa/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/jrx/clion_code/bingfa/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/jrx/clion_code/bingfa/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/jrx/clion_code/bingfa/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="bingfa">
+				<Option output="/home/jrx/clion_code/bingfa/cmake-build-debug/bingfa" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/jrx/clion_code/bingfa/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/jrx/workspace/android-2.3.7_r1/kernel/goldfish2.6.29/include"/>
+					<Add directory="/home/jrx/workspace/android-2.3.7_r1/kernel/goldfish2.6.29/arch/arm/mach-s3c6400/include"/>
+					<Add directory="/home/jrx/workspace/android-2.3.7_r1/kernel/goldfish2.6.29/arch/arm/plat-s3c64xx/include"/>
+					<Add directory="/home/jrx/workspace/android-2.3.7_r1/kernel/goldfish2.6.29/arch/parisc/include"/>
+					<Add directory="/home/jrx/workspace/android-2.3.7_r1/hardware/libhardware/include"/>
+					<Add directory="/home/jrx/workspace/android-2.3.7_r1/system/core/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.4.7/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.4.7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/jrx/clion_code/bingfa/cmake-build-debug/Makefile&quot;  VERBOSE=1 bingfa"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/jrx/clion_code/bingfa/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/jrx/clion_code/bingfa/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/jrx/clion_code/bingfa/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="bingfa/fast">
+				<Option output="/home/jrx/clion_code/bingfa/cmake-build-debug/bingfa" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/jrx/clion_code/bingfa/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/jrx/workspace/android-2.3.7_r1/kernel/goldfish2.6.29/include"/>
+					<Add directory="/home/jrx/workspace/android-2.3.7_r1/kernel/goldfish2.6.29/arch/arm/mach-s3c6400/include"/>
+					<Add directory="/home/jrx/workspace/android-2.3.7_r1/kernel/goldfish2.6.29/arch/arm/plat-s3c64xx/include"/>
+					<Add directory="/home/jrx/workspace/android-2.3.7_r1/kernel/goldfish2.6.29/arch/parisc/include"/>
+					<Add directory="/home/jrx/workspace/android-2.3.7_r1/hardware/libhardware/include"/>
+					<Add directory="/home/jrx/workspace/android-2.3.7_r1/system/core/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.4.7/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.4.7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/jrx/clion_code/bingfa/cmake-build-debug/Makefile&quot;  VERBOSE=1 bingfa/fast"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/jrx/clion_code/bingfa/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/jrx/clion_code/bingfa/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/jrx/clion_code/bingfa/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/jrx/clion_code/bingfa/main.c">
+			<Option target="bingfa"/>
+		</Unit>
+		<Unit filename="/home/jrx/clion_code/bingfa/semaphore.c">
+			<Option target="bingfa"/>
+		</Unit>
+		<Unit filename="/home/jrx/clion_code/bingfa/yuanzicaozuo.c">
+			<Option target="bingfa"/>
+		</Unit>
+		<Unit filename="/home/jrx/clion_code/bingfa/zixuansuo.c">
+			<Option target="bingfa"/>
+		</Unit>
+		<Unit filename="/home/jrx/clion_code/bingfa/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

@@ -95,18 +95,6 @@ int main()
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 /*
 将对int的操作变成原子操作，需要依靠atomic_t数据类型。linux/types.h中定义：
     typedef struct{
