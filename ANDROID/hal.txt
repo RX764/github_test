@@ -2,5 +2,77 @@
 1、编写驱动。
 	代码尽量简洁，将业务逻辑放到HAL中
 2、编写HAL
-	hal library就是普通的Linuxlibrary(.so)文件。但是这类库有一个接口，通过HAL_MODULE_INFO_SYM变量实现。service library就是通过这个借口定义的ID定位HAL library的
+	hal library就是普通的Linuxlibrary(.so)文件。但是这类库有一个接口，通过HAL_MODULE_INFO_SYM变量实现。service library就是通过这个接口定义的ID定位HAL library的
 3、编写service library。不是必需的。比较灵活。
+
+
+hw_module_methonds_t：open函数指针指定open入口函数
+HAL_MODULE_INFO_SYM变量。
+	每个模块必须要有这个变量，类型一般是hw_module_t或者其子结构体。在定义这个变量的代码中初始化一些hw_module_t及其子结构的成员变量。id和method最重要。id是HAL模块中Android系统的标识。method变量需要指向hw_module_method_t的地址.通过id找到HAL模块后，并调用hw_module_methods_t.open
+
+调用hal模块的service(jni)：
+	涉及到hw_moduel_t函数。该函数找到id，获取自己定义的led_module_t结构体，调用ld_module_t.hw_module_methods.open初始化LED驱动。
+
+
+
+HAL模块(.so文件)一般放在/system/lib/hw中。
+
+
+
+可变参数的宏：C99以上才支持。并不是所有编译器都支持。可变参数宏需要通过_VA_VAGS宏获取可变参数宏的可变参数。
+可变参数宏： #define pr_debug(x,...)  printk(x,_VA_VAGS)
+当可变参数为0时会报错，如:pr_debug("hello").在C99中没有定义其他宏来解决，不过在GCC中，在_VA_ARGS_前面加两个#即可。#define pr_debug(x,...) printk(x,##_VA_ARGS_)
+------------------------------------------------------------------------------------
+#if 1
+	#define pr_debug(x,...)  printk(x,##_VA_ARGS_)
+#else
+	#defien pr_debug(x,...)  do{}while(0)
+#endif
+------------------------------------------------------------------------------------
+
+可变参数函数的用法。
+首先，必须包含stdarg.h 头文件，我们用到的东西，都在这个头文件中。包括 va_list，va_start，va_arg, va_end。
+va_list 用于定义一个指向参数的指针，其实就是一个char* 的指针。
+va_start(v1, num); 将v1指针指向可变参数的第一个参数。通过打印*v1可知，打印出来的是，1 ，正是第一个可变参数。
+res = va_arg(v1, int); 这个函数返回v1指针所指的值，并使v1指针
+移动sizeof(int) = 4, 个字节，使其指向下一个参数。以前一直以为当参数类型为char 时，应该写char， 但是今天实践了一下发现，当为char时系统会自动提升为int，当为float时自动提升为double, 字符串时为char * 。。。。…
+va_end(v1); 最后一句，为了安全性，关闭v1指针，其实就是使v1为null。
+
+
+通过虚拟问价按系统进行数据交互
+当前系统的内存资源：cat /proc/meminfo
+在Linux驱动中在/proc目录中创建和删除虚拟文件或目录，函数原型：
+//创建目录
+struct proc_dir_entry *proc_mkdir(const *name,struct proc_dir_entry *parent);
+//创建虚拟文件
+struct proc_dir_entry *create_proc_entry(const char * name,mode_t mode,struct proc_dir_entry *parent)
+//创建虚拟只读文件
+static inline struct proc_dir_entry *create_proc_entry(const char *name,mode_t mode,struct proc_dir_entry *base,read_proc_t *read_proc,void *data)
+//删除/proc目录下文件或目录
+void remove_proc_entry(const char *name,struct proc_dir_entry *parent);
+
+参数：
+name 目录名字
+parent:父目录的proc_dir_entry结构体指针。如果直接在proc下建立目录，该参数为null
+mode:虚拟文件访问权限
+base:父目录的proc_dir_entry结构体指针。如果直接在proc下建立目录，该参数为null
+data:用于虚拟文件系统的数据(任意类型指针)，如果直接在proc下建立目录，该参数为null
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

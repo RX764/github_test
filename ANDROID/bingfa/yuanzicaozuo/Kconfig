@@ -1,0 +1,5 @@
+config YUANZICAOZUO
+	bool "yuanzcaozuo load driver test"
+        default y
+	help 
+	this is a test!!
